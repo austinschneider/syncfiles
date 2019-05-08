@@ -19,11 +19,6 @@ if &term == "screen"
     set t_kb=
 endif
 
-inoremap kj <Esc>
-" Type kj to get out of insert or visual mode!
-" virtual lag caused by the below mapping in visual mode!
-" vnoremap kj <Esc>
-
 " control jikl (akin to wasd) will switch panes
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
