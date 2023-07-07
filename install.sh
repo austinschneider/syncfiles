@@ -1,6 +1,17 @@
+SOURCE=${BASH_SOURCE[0]}
+while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+  SOURCE=$(readlink "$SOURCE")
+  [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+SCRIPT_DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+SCRIPT_NAME=$(basename ${SOURCE})
+SCRIPT_PATH="${SCRIPT_DIR}/${SCRIPT_NAME}"
+
 mv ${HOME}/.vim ${HOME}/.vimbak$(date -d "today" +"%Y%m%d_%H%M")
 mkdir -p ${HOME}/.vim
-mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+#mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
+mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && cp $SOURCE_DIR/wombat256mod.vim ./
 xrdb -merge ${HOME}/.Xresources
 mkdir -p ${HOME}/.vim/autoload ${HOME}/.vim/bundle
 cd ${HOME}/.vim
