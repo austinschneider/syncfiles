@@ -1,4 +1,5 @@
 # .bashrc asdf
+B_RC_INCLUDED=true
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
