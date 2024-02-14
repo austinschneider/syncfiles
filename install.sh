@@ -11,7 +11,7 @@ SCRIPT_PATH="${SCRIPT_DIR}/${SCRIPT_NAME}"
 mv ${HOME}/.vim ${HOME}/.vimbak$(date -d "today" +"%Y%m%d_%H%M")
 mkdir -p ${HOME}/.vim
 #mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
-mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && cp $SOURCE_DIR/wombat256mod.vim ./
+mkdir -p ${HOME}/.vim/colors && cd ${HOME}/.vim/colors && ln -s $SOURCE_DIR/miscfiles/wombat256mod.vim wombat256mod.vim
 xrdb -merge ${HOME}/.Xresources
 mkdir -p ${HOME}/.vim/autoload ${HOME}/.vim/bundle
 cd ${HOME}/.vim
