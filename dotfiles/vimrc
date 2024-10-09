@@ -1,12 +1,11 @@
 "Formatting
+silent! source $VIMRUNTIME/defaults.vim
 syntax on
 
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 let g:syntastic_python_checkers = ['flake8', 'pyflakes', 'pylint']
 let g:syntastic_python_flake8_args = "--max-line-length=160"
-
-autocmd BufEnter * :syntax sync fromstart
 
 " fixes error syntax for $( ) in .sh files
 let g:is_posix = 1
@@ -239,7 +238,10 @@ if has("autocmd")
     augroup Group1
         autocmd!
         filetype plugin indent on
+        autocmd BufEnter * :syntax sync fromstart
         autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " close vim if only nerdtree is left
+
+        autocmd BufReadPost * if (line("'\"") > 1) && (line("'\"") <= line("$")) | silent exe "silent! normal g'\"zO" | endif
 
         au BufNewFile,BufRead *.{p,gp} setlocal ft=gnuplot
         au BufNewFile,BufRead *.md setlocal ft=markdown
