@@ -1,10 +1,11 @@
 # .bashrc asdf
 # Check if B_RC_INCLUDED is set, if so, return
-if [ -z ${B_RC_INCLUDED+x} ]; then
-    return
+if [[ "${B_RC_INCLUDED:-}" = "true" ]]; then
+    return 0
 else
-    B_RC_INCLUDED=true
+    B_RC_INCLUDED="true"
 fi
+
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -15,9 +16,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 if [ -f ${HOME}/.bash_profile ]; then
-    if [ -z "$B_PROF_INCLUDED" ]; then
-        B_PROF_INCLUDED=true
+    if [[ "${B_PROF_INCLUDED:-}" != "true" ]]; then
         . ${HOME}/.bash_profile
+        B_PROF_INCLUDED="true"
     fi
 fi
 
