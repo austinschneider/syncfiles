@@ -96,10 +96,6 @@ export DISPLAY=:0.0
 xrdb -merge ~/.Xresources
 }
 
-function gmake {
-make
-}
-
 function screens {
 COUNTER=0
 for i in `screen -ls | egrep -n ".*Detached.*" | awk '{print $2}' | cut -f1 -d '.'`; do
